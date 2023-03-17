@@ -38,7 +38,10 @@ console.log('submitted')
         Url:''
             }
             let isError=false
-            if(FullName===''){
+            const regexName='Berhampore'
+            const validName=/^[A-Za-z][A-Za-z0-9_]{7,29}$/
+            const FullName=regexName.match(validName)
+            if(FullName===''||!validName.test(FullName)){
               isError=true
               userErrors.FullName='valid name is required'
             }
@@ -54,15 +57,16 @@ console.log('submitted')
               isError=true
               userErrors.Email='valid mail is required'
             }
-             const regex='DW462qqYYafe5n@#%$&*'
-              const validPass=/^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%*#?&])[^\s]{8,20}$/
-              const Password=regex.match(validPass)
+             const regex='DW462qqr'
+              const validPass=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})$/
+               const Password=regex.match(validPass)
              if(Password===''||!validPass.test(Password)){
              isError=true
                 userErrors.Password='valid Password is required'
               }
-
+              const ph='7074467104'
             const validPh=/^\d{10}|\d{11}$/
+            const PhoneNo=ph.match(validPh)
             if(PhoneNo===''||!validPh.test(PhoneNo)){
               console.log('regex')
               isError=true
