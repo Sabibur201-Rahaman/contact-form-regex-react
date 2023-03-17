@@ -11,6 +11,7 @@ function Contact() {
         Url:''
     }
     const[userData,setUserData]=useState(initialData)
+    const[submitted,setSubmitted]=useState(false)
     const[errors,setErrors]=useState({
         FullName:'',
         Email:'',
@@ -41,7 +42,10 @@ console.log('submitted')
               isError=true
               userErrors.FullName='valid name is required'
             }
-            if(UserName===''){
+            const myStr='Sabiburrahaman'
+            const validUser=/^[A-Za-z][A-Za-z0-9_]{7,29}$/
+            const UserName=myStr.match(validUser)
+            if(UserName===''||!validUser.test(UserName)){
               isError=true
               userErrors.UserName='Valid userName is required'
             }
@@ -50,11 +54,14 @@ console.log('submitted')
               isError=true
               userErrors.Email='valid mail is required'
             }
-            const validPass=/^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%*#?&])[^\s]{8,20}$/
-            if(Password===''||!validPass.test(Password)){
-              isError=true
-              userErrors.Password='valid Password is required'
-            }
+             const regex='DW462qqYYafe5n@#%$&*'
+              const validPass=/^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%*#?&])[^\s]{8,20}$/
+              const Password=regex.match(validPass)
+             if(Password===''||!validPass.test(Password)){
+             isError=true
+                userErrors.Password='valid Password is required'
+              }
+
             const validPh=/^\d{10}|\d{11}$/
             if(PhoneNo===''||!validPh.test(PhoneNo)){
               console.log('regex')
@@ -69,6 +76,7 @@ console.log('submitted')
             setUserData(initialData)
             setErrors(userErrors)
             if(isError)return
+            setSubmitted(true)
 
         }
         const{FullName,Email,Password,UserName,PhoneNo,Url}=userData
@@ -79,6 +87,7 @@ console.log('submitted')
     </div>
 
     <div style={{width:600,margin:'0 auto'}}>
+    {submitted&&<h3>form is successfully submitted</h3>}
         <form onSubmit={handleSubmit}>
 <label htmlFor='FullName'>FullName:</label>
 <input type='text'
